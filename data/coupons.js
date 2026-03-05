@@ -1,0 +1,62 @@
+module.exports = [
+  {
+    id: 'coupon_001',
+    code: 'WELCOME10',
+    type: 'percentage',
+    value: 10,
+    minOrderAmount: 500,
+    maxDiscount: 200,
+    usageLimit: 1000,
+    usedCount: 456,
+    validFrom: '2024-01-01T00:00:00Z',
+    validUntil: '2025-12-31T23:59:59Z',
+    isActive: true,
+    applicableCategories: [],
+    applicableProducts: []
+  },
+  {
+    id: 'coupon_002',
+    code: 'FLAT500',
+    type: 'fixed',
+    value: 500,
+    minOrderAmount: 2000,
+    maxDiscount: 500,
+    usageLimit: 500,
+    usedCount: 234,
+    validFrom: '2024-06-01T00:00:00Z',
+    validUntil: '2025-06-30T23:59:59Z',
+    isActive: true,
+    applicableCategories: ['cat_electronics'],
+    applicableProducts: []
+  },
+  {
+    id: 'coupon_003',
+    code: 'AUDIO20',
+    type: 'percentage',
+    value: 20,
+    minOrderAmount: 1000,
+    maxDiscount: 1000,
+    usageLimit: 200,
+    usedCount: 89,
+    validFrom: '2024-01-01T00:00:00Z',
+    validUntil: '2025-03-31T23:59:59Z',
+    isActive: true,
+    applicableCategories: ['cat_audio'],
+    applicableProducts: []
+  },
+  {
+    id: 'coupon_004',
+    code: 'EXPIRED50',
+    type: 'percentage',
+    value: 50,
+    minOrderAmount: 100,
+    maxDiscount: 5000,
+    usageLimit: 100,
+    usedCount: 100,
+    validFrom: '2023-01-01T00:00:00Z',
+    validUntil: '2023-12-31T23:59:59Z',
+    isActive: false,
+    applicableCategories: [],
+    applicableProducts: []
+  }
+];

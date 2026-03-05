@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account - TechStore</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="/" class="logo">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">TechStore</span>
+        </a>
+        
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search products..." autocomplete="off">
+          <button class="search-btn" onclick="performSearch()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <nav class="nav-links">
+          <a href="/products.html">Products</a>
+          <a href="/categories.html">Categories</a>
+          <a href="/orders.html">My Orders</a>
+        </nav>
+        
+        <div class="header-actions">
+          <a href="/wishlist.html" class="icon-btn wishlist-btn" title="Wishlist">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="badge" id="wishlist-count">0</span>
+          </a>
+          <a href="/cart.html" class="icon-btn cart-btn" title="Cart">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="badge" id="cart-count">0</span>
+          </a>
+          <a href="/account.html" class="icon-btn user-btn active" title="Account">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Guest View -->
+      <div id="guest-view">
+        <div class="auth-container">
+          <div class="auth-tabs">
+            <button class="auth-tab active" onclick="showAuthTab('login')">Login</button>
+            <button class="auth-tab" onclick="showAuthTab('register')">Register</button>
+          </div>
+          
+          <div id="login-form" class="auth-form active">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your account</p>
+            <form onsubmit="handleLogin(event)">
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <p class="auth-demo">Demo: john@example.com / password123</p>
+          </div>
+          
+          <div id="register-form" class="auth-form">
+            <h2>Create Account</h2>
+            <p>Join TechStore today</p>
+            <form onsubmit="handleRegister(event)">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="register-name" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="register-email" required>
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="register-phone" required>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="register-password" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logged In View -->
+      <div id="user-view" class="hidden">
+        <div class="account-layout">
+          <aside class="account-sidebar">
+            <div class="user-info-card">
+              <div class="user-avatar">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <h3 id="user-display-name">User Name</h3>
+              <p id="user-display-email">user@example.com</p>
+            </div>
+            <nav class="account-nav">
+              <a href="#profile" class="active" onclick="showAccountSection('profile')">Profile</a>
+              <a href="#addresses" onclick="showAccountSection('addresses')">Addresses</a>
+              <a href="/orders.html">Order History</a>
+              <a href="/wishlist.html">Wishlist</a>
+              <button class="logout-btn" onclick="logout()">Logout</button>
+            </nav>
+          </aside>
+
+          <div class="account-content">
+            <!-- Profile Section -->
+            <div id="profile-section" class="account-section active">
+              <h2>Profile Information</h2>
+              <form id="profile-form" onsubmit="updateProfile(event)">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="profile-name" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="profile-email" disabled>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="tel" id="profile-phone">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+              </form>
+            </div>
+
+            <!-- Addresses Section -->
+            <div id="addresses-section" class="account-section">
+              <div class="section-header-row">
+                <h2>Saved Addresses</h2>
+                <button class="btn btn-sm btn-primary" onclick="showAddAddressForm()">Add New Address</button>
+              </div>
+              <div id="addresses-list" class="addresses-list"></div>
+              
+              <div id="add-address-form" class="add-address-form hidden">
+                <h3>Add New Address</h3>
+                <form onsubmit="saveAddress(event)">
+                  <div class="form-group">
+                    <label>Address Label</label>
+                    <input type="text" id="address-label" placeholder="Home, Office, etc." required>
+                  </div>
+                  <div class="form-group">
+                    <label>Address Line 1</label>
+                    <input type="text" id="address-line1" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Address Line 2</label>
+                    <input type="text" id="address-line2">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>City</label>
+                      <input type="text" id="address-city" required>
+                    </div>
+                    <div class="form-group">
+                      <label>State</label>
+                      <input type="text" id="address-state" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Pincode</label>
+                    <input type="text" id="address-pincode" required>
+                  </div>
+                  <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="hideAddAddressForm()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Address</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>TechStore</h3>
+          <p>Your one-stop shop for premium electronics and gadgets.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="/">Home</a>
+          <a href="/products.html">Products</a>
+          <a href="/categories.html">Categories</a>
+        </div>
+        <div class="footer-col">
+          <h4>Account</h4>
+          <a href="/orders.html">My Orders</a>
+          <a href="/wishlist.html">Wishlist</a>
+          <a href="/account.html">Profile</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <p>support@techstore.com</p>
+          <p>+91 1800-123-4567</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 TechStore. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/common.js"></script>
+  <script src="js/account.js"></script>
+</body>
+</html>
